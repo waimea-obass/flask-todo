@@ -16,17 +16,17 @@
 
 {% block content %}
 
-    <h1>Things...</h1>
+    <h1>Tasks</h1>
 
 
     <article>
 
         <ul>
-            {% for thing in things %}
+            {% for task in tasks %}
 
                 <li>
-                    <a href="/thing/{{ thing.id }}">
-                        {{ thing.name }}
+                    <a href="/task/{{ task.id }}">
+                        {{ task.name }}
                     </a>
                 </li>
 
@@ -42,26 +42,26 @@
 
     <article>
 
-        <h3>Add a New Thing...</h3>
+        <h3>Add a New task</h3>
 
         <form action="/add" method="POST">
 
             <input
                 type="text"
                 name="name"
-                placeholder="Name of new thing"
+                placeholder="task"
                 required
             >
 
             <input
                 type="number"
-                name="price"
+                name="priority"
                 min="0"
-                placeholder="Price in dollars"
+                placeholder="priority"
                 required
             >
 
-            <button>Add the Thing</button>
+            <button>Add the Task</button>
 
         </form>
 
