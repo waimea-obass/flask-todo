@@ -10,7 +10,7 @@
 
 {% block title %}
 
-Flask demo
+Flask Todo
 
 {% endblock %}
 
@@ -22,7 +22,6 @@ Flask demo
     <p>This is a simple Flask app that connects to a Turso database to save and retrieve data. This can be used as the basis of your web app.</p>
 
     <p>It includes...</p>
-    <ul><article><a href="/tasks/">tasks</article></ul></a>
 
     <ul>
         <li>Example routes</li>
@@ -33,7 +32,18 @@ Flask demo
         <li>Flash messages for information</li>
     </ul>
 
-    <a href="/things" role="button">Go to the Things...</a>
+  <section id="tasks">
+
+    {% for task in tasks %}
+    <p><a href="/task/{{ task.id }}">
+
+    {{ task.name }}
+
+    </a></p>
+
+    {% endfor %}
+
+  </section>
 
 {% endblock %}
 
