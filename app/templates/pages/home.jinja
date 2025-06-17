@@ -35,15 +35,40 @@ Flask Todo
   <section id="tasks">
 
     {% for task in tasks %}
-    <p><a href="/task/{{ task.id }}">
+    <p href="/task/{{ task.id }}">
 
-    {{ task.name }}
+<div class="overflow-auto">
+  <table>
+    <span class="name name -{{ task.id }}"> 
+      {{ task.name }}
+      </span>
+  <span class="priority priority -{{ task.id }}"> 
+    {{ task.priority }}</span>
 
-    </a></p>
+    <span class="timetable timetable -{{ task.id }}">
+    {{ task.timetable }}</span>
+
+    <span class="complete complete -{{ task.id }}">
+    {{ task.complete }}</span>
+  </table>
+</div>
+
+
 
     {% endfor %}
 
   </section>
 
+  <form>
+  <div><strong>Be cool and add a new task here v</strong></div>
+  <div><label>Name of Task</label>
+  <input></div>
+  <div><label>Priority</label></div>
+  </form>
+  <input></input>
+  <a><button href="/add">
+  Add Task</button></a>
+
 {% endblock %}
+
 

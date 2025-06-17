@@ -28,14 +28,14 @@ def index():
     with connect_db() as client:
         sql = "SELECT id, name, priority, timestamp, complete FROM tasks ORDER BY name ASC"
         result = client.execute(sql)
-#       tasks = result.rows
+        tasks = result.rows
         return render_template("pages/home.jinja", tasks=tasks)
 
 
-# #-----------------------------------------------------------
-# # tasks page route - Show all the tasks, and new task form
-# #-----------------------------------------------------------
-# @app.get("/tasks/")
+#-----------------------------------------------------------
+# tasks page route - Show all the tasks, and new task form
+#-----------------------------------------------------------
+# @app.get("/")
 # def show_all_tasks():
 #     with connect_db() as client:
 #         # Get all the tasks from the DB
@@ -47,26 +47,26 @@ def index():
 #         return render_template("pages/tasks.jinja", tasks=tasks)
 
 
-# #-----------------------------------------------------------
-# # task page route - Show details of a single task
-# #-----------------------------------------------------------
-# @app.get("/task/<int:id>")
-# def show_one_thing(id):
-#     with connect_db() as client:
-#         # Get the task details from the DB
-#         sql = "SELECT id, name, priority FROM tasks WHERE id=?"
-#         values = [id]
-#         result = client.execute(sql, values)
+#-----------------------------------------------------------
+# task page route - Show details of a single task
+#-----------------------------------------------------------
+@app.get("/<int:id>")
+def show_one_thing(id):
+    with connect_db() as client:
+        # Get the task details from the DB
+        sql = "SELECT id, name, priority, timetable, complete FROM tasks WHERE id=?"
+        values = [id]
+        result = client.execute(sql, values)
 
-#         # Did we get a result?
-#         if result.rows:
-#             # yes, so show it on the page
-#             task = result.rows[0]
-#             return render_template("pages/tasks.jinja", task=task)
+        # Did we get a result?
+        if result.rows:
+            # yes, so show it on the page
+            task = result.rows[0]
+            return render_template("pages/tasks.jinja", task=task)
 
-#         else:
-#             # No, so show error
-#             return not_found_error()
+        else:
+            # No, so show error
+            return not_found_error()
 
 
 #-----------------------------------------------------------
@@ -78,9 +78,11 @@ def add_a_task():
     name  = request.form.get("name")
     priority = request.form.get("priority")
 
+
     # Sanitise the inputs
     name = html.escape(name)
     priority = html.escape(priority)
+
 
     with connect_db() as client:
         # Add the task to the DB
@@ -107,6 +109,5 @@ def delete_a_thing(id):
         # Go back to the home page
         flash("task deleted", "warning")
         return redirect("/")
-
 
 
