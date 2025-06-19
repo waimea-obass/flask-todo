@@ -72,27 +72,28 @@ def show_one_thing(id):
 #-----------------------------------------------------------
 # Route for adding a task, using data posted from a form
 #-----------------------------------------------------------
-@app.post("/add")
+@app.post("/add/")
 def add_a_task():
+    with connect_db() as client:
     # Get the data from the form
-    name  = request.form.get("name")
-    priority = request.form.get("priority")
+        name  = request.form.get("name")
+        priority = request.form.get("priority")
 
 
     # Sanitise the inputs
     name = html.escape(name)
     priority = html.escape(priority)
 
-
-    with connect_db() as client:
+    
         # Add the task to the DB
-        sql = "INSERT INTO tasks (name, priority) VALUES (?, ?)"
-        values = [name, priority]
-        client.execute(sql, values)
+    sql = "INSERT INTO tasks (name, priority) VALUES (?, ?)"
+    values = [name, priority]
+    client.execute(sql, values)
 
         # Go back to the home page
-        flash(f"Task '{name}' added", "success")
-        return redirect("/")
+    flash(f"Task '{name}' and '{priority}' added", "success")
+    print(name)
+    return redirect("/")
 
 
 #-----------------------------------------------------------

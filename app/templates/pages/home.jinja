@@ -33,26 +33,52 @@ Flask Todo
     </ul>
 
   <section id="tasks">
-    <article>
       {% for task in tasks %}
       <p href="/task/{{ task.id }}">
 
-  <div class="overflow-auto">
+  {# <div class="overflow-auto">
     <table>
-      <span class="name name -{{ task.id }}"> 
+      <span class="name name -{{ task.id }}" >Task Name 
         {{ task.name }}
         </span>
-    <span class="priority priority -{{ task.id }}"> 
+        </tr> <tr>
+    <span class="priority priority -{{ task.id }}" > Task Priority
       {{ task.priority }}</span>
-
-      <span class="timetable timetable -{{ task.id }}">
+</tr><tr>
+      <span class="timetable timetable -{{ task.id }}" > Time
       {{ task.timetable }}</span>
-
-      <span class="complete complete -{{ task.id }}">
+</tr> <tr>
+      <span class="complete complete -{{ task.id }}" > Completion
       {{ task.complete }}</span>
-    </table>
+      </tr>
+    </table> #}
+    <table style="width:100%">
+  <tr>
+    <th>Task Name</th>
+    <th>Priority</th>
+    <th>Time Added</th>
+    <th>Completion</th>
+  </tr>
+  <tr>
+    <td><a><span class="name name -{{ task.id }}" >
+    {{ task.name }}</span></a></td>
+
+    <td><a><span class="priority priority -{{ task.id }}">
+    {{ task.priority }}</span></a></td>
+
+    <td><a><span class="timetable timetable -{{ task.id }}">
+      {{ task.timetable }}</span></a></td>
+
+      <td><a><span class="complete complete -{{ task.id }}">
+      {{ task.complete }}</span></a></td>
+  </tr>
+  <tr>
+    <td></td>
+
+  </tr>
+</table>
   </div>
-  </article>
+
 
 
 

@@ -33,3 +33,10 @@
 #messages .message.success { color: var(--pico-ins-color); }
 #messages .message.error   { color: var(--pico-del-color); }
 
+/* HOME PAGE ------------------------------------------------ */
+
+section#tasks div {
+align-items: center;
+justify-content: center;
+background-color: cyan;
+}
